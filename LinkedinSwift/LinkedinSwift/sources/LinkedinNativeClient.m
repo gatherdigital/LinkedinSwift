@@ -57,6 +57,11 @@
 
 
 - (void)requestURL:(NSString* _Nonnull)url requestType:(LinkedinSwiftRequestType* _Nonnull)requestType token:(LSLinkedinToken * _Nonnull)token success:(__nullable LinkedinSwiftRequestSuccessCallback)successCallback error:(__nullable LinkedinSwiftRequestErrorCallback)errorCallback {
+    if (![LISDKSessionManager hasValidSession]) {
+        LISDKAccessToken *accessToken = [LISDKAccessToken LISDKAccessTokenWithValue:token.accessToken expiresOnMillis:[token.expireDate timeIntervalSince1970]];
+        [LISDKSessionManager createSessionWithAccessToken:accessToken];
+    }
+
     [[LISDKAPIHelper sharedInstance] getRequest:url success:^(LISDKAPIResponse *response) {
         successCallback([[LSResponse alloc] initWithString:response.data statusCode:response.statusCode]);
     } error:^(LISDKAPIError *error) {
