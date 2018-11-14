@@ -7,16 +7,16 @@
 //
 
 #import "LSLinkedinToken.h"
+#import <linkedin-sdk/LISDK.h>
 
 @implementation LSLinkedinToken
-@synthesize accessToken, expireDate, isFromMobileSDK;
+@synthesize serializedToken, isFromMobileSDK;
 
-- (instancetype)initWithAccessToken:(NSString*)_accessToken expireDate:(NSDate*)_expireDate fromMobileSDK:(BOOL)_isFromMobileSDK {
+- (instancetype)initWithAccessToken:(NSString*)_accessToken fromMobileSDK:(BOOL)_isFromMobileSDK {
     
     if (self = [super init]) {
         
-        accessToken = _accessToken;
-        expireDate = _expireDate;
+        serializedToken = _accessToken;
         isFromMobileSDK = _isFromMobileSDK;
     }
     
@@ -24,7 +24,11 @@
 }
 
 - (NSString*)description {
-    return [NSString stringWithFormat:@"<LSLinkedinToken - accessToken: %@, expireDate: %@>", accessToken, expireDate];
+    return [NSString stringWithFormat:@"<LSLinkedinToken - serializedToken: %@, expireDate: %@>", serializedToken, [LISDKAccessToken LISDKAccessTokenWithSerializedString:serializedToken].expiration];
+}
+
+- (BOOL)isExpired {
+  return [[LISDKAccessToken LISDKAccessTokenWithSerializedString:serializedToken].expiration timeIntervalSinceNow] < 0;
 }
 
 @end

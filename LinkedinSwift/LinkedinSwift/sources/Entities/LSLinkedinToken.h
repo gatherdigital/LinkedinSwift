@@ -16,17 +16,15 @@
 /**
  *  Linkedin access token
  */
-@property (nonatomic, strong, readonly) NSString *accessToken;
-/**
- *  token expire date
- */
-@property (nonatomic, strong, readonly) NSDate *expireDate;
+@property (nonatomic, strong, readonly) NSString *serializedToken;
 /**
  *  If token is from MobileSDK
  */
 @property (nonatomic, readonly) BOOL isFromMobileSDK;
 
 
-- (instancetype)initWithAccessToken:(NSString*)_accessToken expireDate:(NSDate*)_expireDate fromMobileSDK:(BOOL)_isFromMobileSDK;
+- (instancetype)initWithAccessToken:(NSString*)_accessToken fromMobileSDK:(BOOL)_isFromMobileSDK;
+
+- (BOOL)isExpired;
 
 @end

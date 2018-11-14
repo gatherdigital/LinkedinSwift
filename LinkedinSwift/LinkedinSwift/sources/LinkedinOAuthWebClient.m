@@ -10,6 +10,7 @@
 
 #import <IOSLinkedInAPIFix/LIALinkedInApplication.h>
 #import <IOSLinkedInAPIFix/LIALinkedInHttpClient.h>
+#import <linkedin-sdk/LISDK.h>
 
 @implementation LinkedinOAuthWebClient
 
@@ -39,8 +40,10 @@
             
             NSString *accessToken = [dictionary objectForKey:@"access_token"];
             NSNumber *expiresInSec = [dictionary objectForKey:@"expires_in"];
+
+            LISDKAccessToken *liAccessToken = [LISDKAccessToken LISDKAccessTokenWithValue:accessToken expiresOnMillis:expiresInSec.longLongValue];
             
-            LSLinkedinToken *token = [[LSLinkedinToken alloc] initWithAccessToken:accessToken expireDate:[NSDate dateWithTimeIntervalSinceNow:expiresInSec.doubleValue] fromMobileSDK: NO];
+            LSLinkedinToken *token = [[LSLinkedinToken alloc] initWithAccessToken:[liAccessToken serializedString] fromMobileSDK: NO];
             successCallback(token);
         } failure:^(NSError *error) {
             errorCallback(error);
@@ -56,13 +59,13 @@
 - (void)requestURL:(NSString* _Nonnull)url requestType:(LinkedinSwiftRequestType* _Nonnull)requestType token:(LSLinkedinToken * _Nonnull)token success:(__nullable LinkedinSwiftRequestSuccessCallback)successCallback error:(__nullable LinkedinSwiftRequestErrorCallback)errorCallback {
     
 #ifdef isSessionManager
-    [httpClient GET:url parameters:@{@"oauth2_access_token": token.accessToken} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [httpClient GET:url parameters:@{@"oauth2_access_token": [LISDKAccessToken LISDKAccessTokenWithSerializedString:token.serializedToken].accessTokenValue} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successCallback([[LSResponse alloc] initWithDictionary:responseObject statusCode:200]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         errorCallback(error);
     }];
 #else
-    [httpClient GET:url parameters:@{@"oauth2_access_token": token.accessToken} success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [httpClient GET:url parameters:@{@"oauth2_access_token": [LISDKAccessToken LISDKAccessTokenWithSerializedString:token.serializedToken].accessTokenValue} success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         successCallback([[LSResponse alloc] initWithDictionary:responseObject statusCode:200]);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         errorCallback(error);

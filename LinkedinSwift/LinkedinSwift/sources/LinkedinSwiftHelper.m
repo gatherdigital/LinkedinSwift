@@ -33,7 +33,7 @@
 }
 
 - (_Nonnull instancetype)initWithConfiguration:(LinkedinSwiftConfiguration* _Nonnull)_configuration nativeAppChecker:(NativeAppInstalledChecker* _Nullable)_checker clients:(NSArray <id<LinkedinClient>>* _Nullable)clients webOAuthPresentViewController:(UIViewController* _Nullable)presentViewController persistedLSToken:(LSLinkedinToken* _Nullable)lsToken {
-    
+
     if (self = [super init]) {
         if (_checker == nil) {
             checker = [NativeAppInstalledChecker new]; // create default NativeAppInstalledChecker if user not passing one 
@@ -71,7 +71,7 @@
     /**
      *  If previous token still in memory callback directly
      */
-    if (lsAccessToken != nil && [lsAccessToken.expireDate timeIntervalSinceNow] > 0) {
+    if (lsAccessToken != nil && !lsAccessToken.isExpired) {
         successCallback(lsAccessToken);
     } else {
         

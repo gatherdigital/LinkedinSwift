@@ -32,7 +32,7 @@
     // check if session is still cached
     if (session && session.isValid) {
         
-        LSLinkedinToken *token = [[LSLinkedinToken alloc] initWithAccessToken:session.accessToken.accessTokenValue expireDate:session.accessToken.expiration fromMobileSDK: YES];
+        LSLinkedinToken *token = [[LSLinkedinToken alloc] initWithAccessToken:[session.accessToken serializedString] fromMobileSDK: YES];
         successCallback(token);
     } else {
         
@@ -41,7 +41,7 @@
             
             // refresh session
             session = [[LISDKSessionManager sharedInstance] session];
-            LSLinkedinToken *token =  [[LSLinkedinToken alloc] initWithAccessToken:session.accessToken.accessTokenValue expireDate:session.accessToken.expiration fromMobileSDK: YES];
+            LSLinkedinToken *token =  [[LSLinkedinToken alloc] initWithAccessToken:[session.accessToken serializedString] fromMobileSDK: YES];
             successCallback(token);
             
         } errorBlock:^(NSError *error) {
@@ -58,7 +58,7 @@
 
 - (void)requestURL:(NSString* _Nonnull)url requestType:(LinkedinSwiftRequestType* _Nonnull)requestType token:(LSLinkedinToken * _Nonnull)token success:(__nullable LinkedinSwiftRequestSuccessCallback)successCallback error:(__nullable LinkedinSwiftRequestErrorCallback)errorCallback {
     if (![LISDKSessionManager hasValidSession]) {
-        LISDKAccessToken *accessToken = [LISDKAccessToken LISDKAccessTokenWithValue:token.accessToken expiresOnMillis:[token.expireDate timeIntervalSince1970]];
+        LISDKAccessToken *accessToken = [LISDKAccessToken LISDKAccessTokenWithSerializedString:token.serializedToken];
         [LISDKSessionManager createSessionWithAccessToken:accessToken];
     }
 

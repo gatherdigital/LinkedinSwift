@@ -239,7 +239,6 @@
 				10F97B1E1BFBA10500C420E4 /* Frameworks */,
 				10F97B1F1BFBA10500C420E4 /* Headers */,
 				10F97B201BFBA10500C420E4 /* Resources */,
-				21399E5BEDDE1E93D66FBEF1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -258,8 +257,6 @@
 				10F97B281BFBA10500C420E4 /* Sources */,
 				10F97B291BFBA10500C420E4 /* Frameworks */,
 				10F97B2A1BFBA10500C420E4 /* Resources */,
-				3FC39B87AF103AC1F2AF841B /* [CP] Embed Pods Frameworks */,
-				67E262E27E6290D0F7E02CD8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -324,36 +321,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		21399E5BEDDE1E93D66FBEF1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LinkedinSwift/Pods-LinkedinSwift-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3FC39B87AF103AC1F2AF841B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LinkedinSwiftTests/Pods-LinkedinSwiftTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		431C31E17579AECB0F784A3C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,21 +355,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		67E262E27E6290D0F7E02CD8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LinkedinSwiftTests/Pods-LinkedinSwiftTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

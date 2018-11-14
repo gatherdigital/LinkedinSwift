@@ -25,6 +25,8 @@
  */
 @property (nonatomic, strong, readonly) LSLinkedinToken * _Nullable lsAccessToken;
 
+@property (nonatomic, strong, readonly) NSString * _Nullable serializedAccessToken;
+
 /**
  *  Init with configuration
  *
